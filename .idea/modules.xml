@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/backstage/backstage.iml" filepath="$PROJECT_DIR$/backstage/backstage.iml" />
+      <module fileurl="file://$PROJECT_DIR$/explorer.iml" filepath="$PROJECT_DIR$/explorer.iml" />
+      <module fileurl="file://$PROJECT_DIR$/gateway/gateway.iml" filepath="$PROJECT_DIR$/gateway/gateway.iml" />
+      <module fileurl="file://$PROJECT_DIR$/user/user.iml" filepath="$PROJECT_DIR$/user/user.iml" />
+      <module fileurl="file://$PROJECT_DIR$/user/user-export/user-export.iml" filepath="$PROJECT_DIR$/user/user-export/user-export.iml" />
+      <module fileurl="file://$PROJECT_DIR$/user-server/user-server.iml" filepath="$PROJECT_DIR$/user-server/user-server.iml" />
+      <module fileurl="file://$PROJECT_DIR$/user/user-service/user-service.iml" filepath="$PROJECT_DIR$/user/user-service/user-service.iml" />
+    </modules>
+  </component>
+</project>
