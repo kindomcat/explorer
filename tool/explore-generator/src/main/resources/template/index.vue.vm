@@ -1,0 +1,229 @@
+<template>
+  <div class="wrapper">
+    <div class="wrapper_top">
+      <el-form :inline="true" status-icon label-position="left">
+        <el-form-item label="名称">
+          <el-input v-model="query.name" autocomplete="off" />
+        </el-form-item>
+      </el-form>
+      <div class="btn_right">
+        <el-button type="primary" :disabled="loading" @click="search()">&ensp;&ensp;查询&ensp;&ensp;</el-button>
+        <el-button type="info" @click="reset()">&ensp;&ensp;重置&ensp;&ensp;</el-button>
+      </div>
+    </div>
+    <div class="wrapper_bot">
+      <div class="add_del_btn">
+        <el-button type="danger" size="medium" @click="delSome()">批量删除</el-button>
+        <el-button class="add" type="primary" size="medium" @click="handlerAdd"> + 新增 </el-button>
+      </div>
+      <el-table
+        v-loading="loading"
+        :data="tableList"
+        min-width="100%"
+        @selection-change="handleSelectionChange"
+      >
+        <el-table-column
+          type="selection"
+          width="55"
+        />
+        #foreach ($column in $columns)
+        <el-table-column
+          prop="$column.columnName"
+          label="$column.comments"
+        />
+        #end
+        <el-table-column
+          label="操作"
+          width="180"
+        >
+          <template slot-scope="scope">
+            <el-tooltip class="item" effect="dark" content="编辑" placement="bottom">
+              <span class="handle" @click="handleEdit(scope.row)"><svg-icon icon-class="edit" /></span>
+            </el-tooltip>
+            <el-tooltip class="item" effect="dark" content="删除" placement="bottom">
+              <span style="color: red" @click="delOne(scope.row.id)"><svg-icon icon-class="delete" /></span>
+            </el-tooltip>
+          </template>
+        </el-table-column>
+      </el-table>
+    </div>
+    <div class="pagination">
+      <el-pagination
+        :total="listTotal"
+        background
+        layout="total,prev, pager, next, jumper, slot"
+        :page-size.sync="query.page_size"
+        :current-page.sync="query.page_num"
+        @size-change="search"
+        @current-change="search"
+      />
+    </div>
+    <div class="dialog">
+      <el-dialog top="25vh" style="border-radius: 8px" width="660px" :visible.sync="dialogFormVisible">
+        <div class="title">
+          <h2>{{ dialogTitle }}</h2>
+          <div class="content">
+            <el-form ref="${secondModuleName}" :inline="true" label-width="110px" :rules="rules" :model="obj" class="demo-form-inline">
+              #foreach ($column in $columns)
+              <el-form-item label="$column.comments" prop="$column.columnName">
+                <el-input v-model="obj.$column.columnName" />
+              </el-form-item>
+              #end
+            </el-form>
+          </div>
+        </div>
+        <div slot="footer" class="dialog-footer">
+          <el-button type="info" @click="cancel">取 消</el-button>
+          <el-button type="primary" @click="save">保 存</el-button>
+        </div>
+      </el-dialog>
+    </div>
+  </div>
+</template>
+
+<script>
+import * as HttpService from '@/utils/request.js'
+export default {
+  name: 'SecondModuleName',
+  data() {
+    return {
+      dialogTitle: '新增',
+      dialogState: 'add',
+      loading: false,
+      dialogFormVisible: false,
+      tableList: [],
+      listTotal: 0,
+      initQuery: {},
+      query: {
+        name: '',
+        page_size: 10,
+        page_num: 1
+      },
+      obj: {},
+      selectedIdList: [],
+      rules: {
+
+      }
+    }
+  },
+  created() {
+    this.initSearch()
+  },
+  methods: {
+    handleSelectionChange(val) {
+      this.selectedIdList = val.map((item) => {
+        return item.id
+      })
+    },
+    search() {
+      this.query.page_num = 1
+      this.initSearch()
+    },
+    initSearch() {
+      HttpService.postHttp('/${secondModuleName}/page/query', null, this.query).then(res => {
+        if (res.rel) {
+          this.tableList = res.data.datas
+          this.listTotal = res.data.meta.total
+        }
+      })
+    },
+    reset() {
+      this.query = { ...this.initQuery }
+    },
+    delOne(id) {
+      this.delCommon([id])
+    },
+    delSome() {
+      this.delCommon(this.selectedIdList)
+    },
+    delCommon(ids) {
+      if (ids.length < 1) {
+        this.$message({ message: '请选择要删除的数据', type: 'warning' })
+        return
+      }
+      this.$confirm('确定要删除？', '删除', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        callback: action => {
+          if (action === 'confirm') {
+            HttpService.deleteHttp('/${secondModuleName}/del', { ids: ids + '' }).then(res => {
+              if (res.rel) {
+                this.initSearch()
+                this.notify.success({ title:'成功', message: "操作成功" })
+              } else {
+                this.notify.error({ title:'错误', message: res.message })
+              }
+            })
+          }
+        }
+      })
+    },
+    handlerAdd() {
+      this.dialogTitle = '新增'
+      this.dialogState = 'add'
+      this.dialogFormVisible = true
+    },
+    handleEdit(row) {
+      this.obj = { ...row }
+      this.dialogFormVisible = true
+      this.dialogTitle = '编辑'
+      this.dialogState = 'edit'
+    },
+    cancel() {
+      this.dialogFormVisible = false
+      this.obj = {}
+    },
+    save() {
+      this.refs['${secondModuleName}'].validate((valid) => {
+        if(valid && this.dialogState === 'add') {
+          HttpService.postHttp('/${secondModuleName}',null,this.obj).then(res => {
+            if (res.rel) {
+              this.notify.success({ title: '成功', message: '操作成功', type: 'success' })
+              this.search()
+              this.cancel()
+            } else {
+              this.notify.error({ title: '错误', message: res.message })
+            }
+          })
+        } else if (valid && this.dialogState === 'edit') {
+          HttpService.putHttp('/${secondModuleName}/' + this.obj.id, null, this.obj).then(res => {
+            if (res.rel) {
+              this.notify.success({ title: '成功', message: '操作成功', type: 'success' })
+              this.search()
+              this.cancel()
+            } else {
+              this.notify.error({ title: '错误', message: res.message })
+            }
+          })
+        }
+      })
+    }
+  }
+}
+</script>
+<style scoped lang="scss">
+  @import "./../../styles/common.scss";
+  .dialog{
+    border-radius: 20px;
+    .title{
+      h2{
+        margin: 0;
+        padding: 20px 40px;
+        background: #5b6478;
+        color: #fff;
+        font-weight: 600;
+      }
+    }
+    .content{
+      padding:10px;
+      p{
+        padding: 10px;
+      }
+    }
+  }
+  .select_position{
+    width: 1000px;
+    height: 750px;
+    overflow: auto;
+  }
+</style>

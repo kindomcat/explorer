@@ -4,7 +4,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.cloud.explore</groupId>
     <artifactId>explorer</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>${explorer.version}</version>
     <packaging>pom</packaging>
     <name>explorer</name>
 
@@ -12,9 +12,12 @@
         <module>backstage</module>
         <module>gateway</module>
         <module>user</module>
+        <module>common</module>
+        <module>tool</module>
     </modules>
 
     <properties>
+        <explorer.version>0.0.1-SNAPSHOT</explorer.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <maven.compiler.source>1.8</maven.compiler.source>
@@ -45,6 +48,12 @@
                 <version>0.2.1.RELEASE</version>
                 <type>pom</type>
                 <scope>import</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>com.cloud.explore</groupId>
+                <artifactId>explorer-common-util</artifactId>
+                <version>${explorer.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

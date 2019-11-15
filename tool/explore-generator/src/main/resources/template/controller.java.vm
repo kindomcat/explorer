@@ -1,0 +1,38 @@
+package ${package}.rest;
+
+import com.github.wxiaoqi.security.common.msg.ObjectRestResponse;
+import com.github.wxiaoqi.security.common.rest.BaseController;
+import ${package}.biz.${className}Biz;
+import ${package}.entity.${className};
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+@RequestMapping("${secondModuleName}")
+public class ${className}Controller {
+
+    @PostMapping("/page/query")
+    public ObjectRestResponse pageQuery(){
+        return ObjectRestResponse.success(true);
+    }
+
+    @DeleteMapping("/del")
+    @ApiOperation("删除")
+    public ObjectRestResponse<Boolean> delete(int[] ids) {
+        return ObjectRestResponse.success(true);
+    }
+
+    @PostMapping(value = "")
+    @ApiOperation("添加")
+    public ObjectRestResponse<Boolean> add() {
+        return ObjectRestResponse.success(true);
+    }
+
+    @PutMapping(value = "/{id}")
+    @ApiOperation("修改")
+    public ObjectRestResponse<Boolean> update() {
+        return ObjectRestResponse.success(true);
+    }
+}

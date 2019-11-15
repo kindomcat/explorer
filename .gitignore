@@ -1,3 +1,10 @@
 .idea/
 *.iml
 user/user-admin/target/
+gateway/target/classes/com/explore/gateway/GatewayApplication.class
+gateway/target/
+tool/explore-generator/target/
+user/user-api/target/
+common/target/
+backstage/target/
+common/explorer-common-util/target/

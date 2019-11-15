@@ -29,6 +29,10 @@
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.cloud.explore</groupId>
+            <artifactId>explorer-common-util</artifactId>
+        </dependency>
     </dependencies>
 
     <build>
