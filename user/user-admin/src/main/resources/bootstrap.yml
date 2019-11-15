@@ -1,0 +1,12 @@
+spring:
+  application:
+    name: user-admin
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 115.28.210.235:8848
+      config:
+        server-addr: 115.28.210.235:8848
+        file-extension: yaml
+  profiles:
+    active: dev

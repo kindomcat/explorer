@@ -15,8 +15,8 @@
     <name>user</name>
 
     <modules>
-        <module>user-export</module>
-        <module>user-service</module>
+        <module>user-api</module>
+        <module>user-admin</module>
     </modules>
     <properties>
         <java.version>1.8</java.version>

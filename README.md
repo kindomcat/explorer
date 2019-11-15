@@ -1,0 +1,11 @@
+nacos容器启动，启动命令：
+docker run --env-file=env.list --name nacos -d -p 8848:8848 nacos/nacos-server
+env.list内容：
+MODE=standalone
+SPRING_DATASOURCE_PLATFORM=mysql
+MYSQL_MASTER_SERVICE_DB_NAME=nacos_config
+MYSQL_MASTER_SERVICE_HOST=115.28.210.235
+MYSQL_MASTER_SERVICE_USER=root
+MYSQL_MASTER_SERVICE_PASSWORD=root
+MYSQL_SLAVE_SERVICE_HOST=115.28.210.235
+MYSQL_MASTER_SERVICE_DB_NAME=nacos_config
