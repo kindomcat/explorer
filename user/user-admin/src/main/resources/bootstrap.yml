@@ -1,6 +1,6 @@
 spring:
   application:
-    name: user-admin
+    name: explorer-user-admin
   cloud:
     nacos:
       discovery:
