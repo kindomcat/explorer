@@ -12,14 +12,14 @@ public class ComConstant {
      * 性别
      */
     public static class Sex{
-        private static final int MAN =1;
-        private static final int WOMAN =0;
+        public static final int MAN =1;
+        public static final int WOMAN =0;
     }
     /**
      * 状态 启用/禁用
      */
     public static class Status {
-        private static final int YES =1;
-        private static final int NO =0;
+        public static final int YES =1;
+        public static final int NO =0;
     }
 }
