@@ -2,6 +2,8 @@ package com.explorer.generator.entity;
 
 import lombok.Data;
 
+import java.time.LocalDateTime;
+
 /**
  * 列的属性
  *
@@ -28,6 +30,7 @@ public class ColumnEntity {
     private String extra;
     //列名小写转化为大写 如：user_name => USER_NAME
     private String upperColumn;
+
 
 	public String getColumnName() {
         return columnName;

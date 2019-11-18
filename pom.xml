@@ -55,6 +55,37 @@
                 <artifactId>explorer-common-util</artifactId>
                 <version>${explorer.version}</version>
             </dependency>
+
+            <dependency>
+                <groupId>com.github.drtrang</groupId>
+                <artifactId>druid-spring-boot2-starter</artifactId>
+                <version>1.1.10</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-jdbc</artifactId>
+            </dependency>
+            <dependency>
+                <groupId>mysql</groupId>
+                <artifactId>mysql-connector-java</artifactId>
+                <version>5.1.27</version>
+            </dependency>
+            <!-- 通用mapper -->
+            <dependency>
+                <groupId>tk.mybatis</groupId>
+                <artifactId>mapper-spring-boot-starter</artifactId>
+                <version>1.1.2</version>
+            </dependency>
+            <dependency>
+                <groupId>tk.mybatis</groupId>
+                <artifactId>mapper</artifactId>
+                <version>3.4.0</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-lang3</artifactId>
+                <version>3.4</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 

@@ -8,5 +8,6 @@ spring:
       config:
         server-addr: 115.28.210.235:8848
         file-extension: yaml
+        shared-dataids: spring-data.yaml
   profiles:
     active: dev

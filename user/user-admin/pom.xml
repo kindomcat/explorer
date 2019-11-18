@@ -33,6 +33,28 @@
             <groupId>com.cloud.explore</groupId>
             <artifactId>explorer-common-util</artifactId>
         </dependency>
+
+        <dependency>
+            <groupId>com.github.drtrang</groupId>
+            <artifactId>druid-spring-boot2-starter</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-jdbc</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+        </dependency>
+        <!-- 通用mapper -->
+        <dependency>
+            <groupId>tk.mybatis</groupId>
+            <artifactId>mapper-spring-boot-starter</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>tk.mybatis</groupId>
+            <artifactId>mapper</artifactId>
+        </dependency>
     </dependencies>
 
     <build>
