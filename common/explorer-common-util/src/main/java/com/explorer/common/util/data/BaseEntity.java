@@ -3,7 +3,7 @@ package com.explorer.common.util.data;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 import java.io.Serializable;
-import java.util.Date;
+import java.time.LocalDateTime;
 
 /**
  * @desc:
@@ -16,10 +16,10 @@ import java.util.Date;
 public class BaseEntity implements Serializable {
 
     @JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
-    private Date crtTime;
+    private LocalDateTime crtTime;
 
     @JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
-    private Date updTime;
+    private LocalDateTime updTime;
 
     public static final String CRT_TIME = "crtTime";
 

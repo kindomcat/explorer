@@ -1,9 +1,8 @@
 package com.explorer.common.util.util;
 
 import com.explorer.common.util.data.BaseEntity;
-import java.lang.reflect.Field;
+
 import java.time.LocalDateTime;
-import java.util.Date;
 
 
 /**
@@ -33,14 +32,8 @@ public class EntityUtils {
     public static <T> void setCreateInfo(T entity) {
         // 默认属性
         String[] fields = {BaseEntity.CRT_TIME};
-        Field field = ReflectionUtils.getAccessibleField(entity, BaseEntity.CRT_TIME);
-        // 默认值
-        Object[] value = null;
-        if (field != null && field.getType().equals(LocalDateTime.class)) {
-            value = new Object[]{LocalDateTime.now()};
-        }
         // 填充默认属性值
-        setDefaultValues(entity, fields, value);
+        setDefaultValues(entity, fields, new Object[]{LocalDateTime.now()});
     }
 
     /**
@@ -52,13 +45,8 @@ public class EntityUtils {
     public static <T> void setUpdatedInfo(T entity) {
         // 默认属性
         String[] fields = {BaseEntity.UPD_TIME};
-        Field field = ReflectionUtils.getAccessibleField(entity, BaseEntity.UPD_TIME);
-        Object[] value = null;
-        if (field != null && field.getType().equals(Date.class)) {
-            value = new Object[]{LocalDateTime.now()};
-        }
         // 填充默认属性值
-        setDefaultValues(entity, fields, value);
+        setDefaultValues(entity, fields, new Object[]{LocalDateTime.now()});
     }
 
     /**
